@@ -197,6 +197,35 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
+            <plugin>
+                <!-- Enforcing specific versions for microservices -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <!-- maven version to 3.6.0 or higher -->
+                                <requireMavenVersion>
+                                    <version>[3.6.0,)</version>
+                                </requireMavenVersion>
+                                <!-- java version to 11 -->
+                                <requireJavaVersion>
+                                    <version>11</version>
+                                </requireJavaVersion>
+                                <requireReleaseDeps>
+                                    <onlyWhenRelease>true</onlyWhenRelease>
+                                    <message>Release builds must not have on snapshot dependencies</message>
+                                </requireReleaseDeps>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
